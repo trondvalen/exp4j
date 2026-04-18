@@ -1,7 +1,8 @@
 package net.objecthunter.exp4j.tokenizer;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 
 /**
@@ -12,12 +13,14 @@ import org.junit.Test;
  */
 public class TokenizerUnknownTokenOrVariableTest {
 
-    @Test(expected = UnknownFunctionOrVariableException.class)
+    @Test
     public void testTokenizationOfUnknownVariable() {
-        final Tokenizer tokenizer = new Tokenizer("3 + x", null, null, null);
-        while (tokenizer.hasNext()) {
-            tokenizer.nextToken();
-        }
+        assertThrows(UnknownFunctionOrVariableException.class, () -> {
+            final Tokenizer tokenizer = new Tokenizer("3 + x", null, null, null);
+            while (tokenizer.hasNext()) {
+                tokenizer.nextToken();
+            }
+        });
     }
 
     @Test
@@ -29,11 +32,11 @@ public class TokenizerUnknownTokenOrVariableTest {
 
         try {
             tokenizer.nextToken(); // x
-            Assert.fail("Variable 'x' should be unknown!");
+            Assertions.fail("Variable 'x' should be unknown!");
         } catch (UnknownFunctionOrVariableException e) {
-            Assert.assertEquals("x", e.getToken());
-            Assert.assertEquals(4, e.getPosition());
-            Assert.assertEquals("3 + x", e.getExpression());
+            Assertions.assertEquals("x", e.getToken());
+            Assertions.assertEquals(4, e.getPosition());
+            Assertions.assertEquals("3 + x", e.getExpression());
         }
     }
 
@@ -44,20 +47,22 @@ public class TokenizerUnknownTokenOrVariableTest {
 
         try {
             tokenizer.nextToken(); // x
-            Assert.fail("Variable 'x' should be unknown!");
+            Assertions.fail("Variable 'x' should be unknown!");
         } catch (UnknownFunctionOrVariableException e) {
-            Assert.assertEquals("x", e.getToken());
-            Assert.assertEquals(0, e.getPosition());
-            Assert.assertEquals("x + 3", e.getExpression());
+            Assertions.assertEquals("x", e.getToken());
+            Assertions.assertEquals(0, e.getPosition());
+            Assertions.assertEquals("x + 3", e.getExpression());
         }
     }
 
-    @Test(expected = UnknownFunctionOrVariableException.class)
+    @Test
     public void testTokenizationOfUnknownFunction() {
-        final Tokenizer tokenizer = new Tokenizer("3 + p(1)", null, null, null);
-        while (tokenizer.hasNext()) {
-            tokenizer.nextToken();
-        }
+        assertThrows(UnknownFunctionOrVariableException.class, () -> {
+            final Tokenizer tokenizer = new Tokenizer("3 + p(1)", null, null, null);
+            while (tokenizer.hasNext()) {
+                tokenizer.nextToken();
+            }
+        });
     }
 
     @Test
@@ -69,11 +74,11 @@ public class TokenizerUnknownTokenOrVariableTest {
 
         try {
             tokenizer.nextToken(); // p
-            Assert.fail("Function 'p' should be unknown!");
+            Assertions.fail("Function 'p' should be unknown!");
         } catch (UnknownFunctionOrVariableException e) {
-            Assert.assertEquals("p", e.getToken());
-            Assert.assertEquals(4, e.getPosition());
-            Assert.assertEquals("3 + p(1)", e.getExpression());
+            Assertions.assertEquals("p", e.getToken());
+            Assertions.assertEquals(4, e.getPosition());
+            Assertions.assertEquals("3 + p(1)", e.getExpression());
         }
     }
 
@@ -84,11 +89,11 @@ public class TokenizerUnknownTokenOrVariableTest {
 
         try {
             tokenizer.nextToken(); // p
-            Assert.fail("Function 'p' should be unknown!");
+            Assertions.fail("Function 'p' should be unknown!");
         } catch (UnknownFunctionOrVariableException e) {
-            Assert.assertEquals("p", e.getToken());
-            Assert.assertEquals(0, e.getPosition());
-            Assert.assertEquals("p(1) + 3", e.getExpression());
+            Assertions.assertEquals("p", e.getToken());
+            Assertions.assertEquals(0, e.getPosition());
+            Assertions.assertEquals("p(1) + 3", e.getExpression());
         }
     }
 }

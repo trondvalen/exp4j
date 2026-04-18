@@ -16,12 +16,12 @@
 package net.objecthunter.exp4j;
 
 import net.objecthunter.exp4j.function.Function;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class ExpressionValidateTest {
@@ -70,7 +70,7 @@ public class ExpressionValidateTest {
         Expression exp = new ExpressionBuilder("1")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -78,7 +78,7 @@ public class ExpressionValidateTest {
         Expression exp = new ExpressionBuilder("+1")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ExpressionValidateTest {
         Expression exp = new ExpressionBuilder("-1")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ExpressionValidateTest {
                 .variable("x")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class ExpressionValidateTest {
                 .variable("x")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -113,7 +113,7 @@ public class ExpressionValidateTest {
                 .variable("x")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -122,7 +122,7 @@ public class ExpressionValidateTest {
                 .variable("x")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -131,7 +131,7 @@ public class ExpressionValidateTest {
                 .variable("x")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -141,7 +141,7 @@ public class ExpressionValidateTest {
                 .functions(beta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -151,7 +151,7 @@ public class ExpressionValidateTest {
                 .functions(beta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -161,7 +161,7 @@ public class ExpressionValidateTest {
                 .functions(gamma)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -171,7 +171,7 @@ public class ExpressionValidateTest {
                 .functions(gamma)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -181,7 +181,7 @@ public class ExpressionValidateTest {
                 .functions(gamma, beta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -191,7 +191,7 @@ public class ExpressionValidateTest {
                 .functions(gamma, beta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -201,7 +201,7 @@ public class ExpressionValidateTest {
                 .functions(gamma, beta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -210,7 +210,7 @@ public class ExpressionValidateTest {
                 .functions(eta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     @Test
@@ -219,7 +219,7 @@ public class ExpressionValidateTest {
                 .functions(eta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertTrue(result.isValid());
+        Assertions.assertTrue(result.isValid());
     }
 
     // invalid scenarios
@@ -229,7 +229,7 @@ public class ExpressionValidateTest {
         Expression exp = new ExpressionBuilder("sin()")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertFalse(result.isValid());
+        Assertions.assertFalse(result.isValid());
     }
 
     @Test
@@ -237,7 +237,7 @@ public class ExpressionValidateTest {
         Expression exp = new ExpressionBuilder("1 + ")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertFalse(result.isValid());
+        Assertions.assertFalse(result.isValid());
     }
 
     @Test
@@ -246,7 +246,7 @@ public class ExpressionValidateTest {
                 .functions(beta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertFalse(result.isValid());
+        Assertions.assertFalse(result.isValid());
     }
 
     @Test
@@ -255,7 +255,7 @@ public class ExpressionValidateTest {
                 .functions(beta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertFalse(result.isValid());
+        Assertions.assertFalse(result.isValid());
     }
 
     @Test
@@ -264,7 +264,7 @@ public class ExpressionValidateTest {
                 .functions(beta)
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertFalse(result.isValid());
+        Assertions.assertFalse(result.isValid());
     }
 
     @Test
@@ -272,7 +272,7 @@ public class ExpressionValidateTest {
         Expression exp = new ExpressionBuilder("+")
                 .build();
         ValidationResult result = exp.validate(false);
-        Assert.assertFalse(result.isValid());
+        Assertions.assertFalse(result.isValid());
     }
 
     // Thanks go out to werwiesel for reporting the issue

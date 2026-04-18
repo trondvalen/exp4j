@@ -15,7 +15,7 @@
  */
 package net.objecthunter.exp4j;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;

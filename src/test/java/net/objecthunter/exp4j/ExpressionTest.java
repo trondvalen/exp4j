@@ -19,14 +19,15 @@ import net.objecthunter.exp4j.function.Functions;
 import net.objecthunter.exp4j.operator.Operator;
 import net.objecthunter.exp4j.operator.Operators;
 import net.objecthunter.exp4j.tokenizer.*;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class ExpressionTest {
@@ -165,62 +166,67 @@ public class ExpressionTest {
 
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void testInvalidCotangent1() {
-        Expression e = new ExpressionBuilder("cot(0)")
-                .build();
-        e.evaluate();
-
+        assertThrows(ArithmeticException.class, () -> {
+            Expression e = new ExpressionBuilder("cot(0)")
+                    .build();
+            e.evaluate();
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testOperatorFactorial2() {
-        Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
 
-            @Override
-            public double apply(double... args) {
-                final int arg = (int) args[0];
-                if ((double) arg != args[0]) {
-                    throw new IllegalArgumentException("Operand for factorial has to be an integer");
+                @Override
+                public double apply(double... args) {
+                    final int arg = (int) args[0];
+                    if ((double) arg != args[0]) {
+                        throw new IllegalArgumentException("Operand for factorial has to be an integer");
+                    }
+                    if (arg < 0) {
+                        throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
+                    }
+                    double result = 1;
+                    for (int i = 1; i <= arg; i++) {
+                        result *= i;
+                    }
+                    return result;
                 }
-                if (arg < 0) {
-                    throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
-                }
-                double result = 1;
-                for (int i = 1; i <= arg; i++) {
-                    result *= i;
-                }
-                return result;
-            }
-        };
+            };
 
-        Expression e = new ExpressionBuilder("!3").build();
-        assertFalse(e.validate().isValid());
+            Expression e = new ExpressionBuilder("!3").build();
+            assertFalse(e.validate().isValid());
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testInvalidFactorial2() {
-        Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
 
-            @Override
-            public double apply(double... args) {
-                final int arg = (int) args[0];
-                if ((double) arg != args[0]) {
-                    throw new IllegalArgumentException("Operand for factorial has to be an integer");
+                @Override
+                public double apply(double... args) {
+                    final int arg = (int) args[0];
+                    if ((double) arg != args[0]) {
+                        throw new IllegalArgumentException("Operand for factorial has to be an integer");
+                    }
+                    if (arg < 0) {
+                        throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
+                    }
+                    double result = 1;
+                    for (int i = 1; i <= arg; i++) {
+                        result *= i;
+                    }
+                    return result;
                 }
-                if (arg < 0) {
-                    throw new IllegalArgumentException("The operand of the factorial can not be less than zero");
-                }
-                double result = 1;
-                for (int i = 1; i <= arg; i++) {
-                    result *= i;
-                }
-                return result;
-            }
-        };
+            };
 
-        Expression e = new ExpressionBuilder("!!3").build();
-        assertFalse(e.validate().isValid());
+            Expression e = new ExpressionBuilder("!!3").build();
+            assertFalse(e.validate().isValid());
+        });
     }
 
     @Test
@@ -262,7 +268,7 @@ public class ExpressionTest {
 
 
     @Test
-    @Ignore
+    @Disabled
     // If Expression should be threads safe this test must pass
     public void evaluateFamily() {
         final Expression e = new ExpressionBuilder("sin(x)")
